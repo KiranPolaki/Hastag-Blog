@@ -1,8 +1,9 @@
 name = "hastag-blog"
 compatibility_date = "2023-12-01"
 
-# [vars]
-# MY_VAR = "my-variable"
+[vars]
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiYmMyMzU4M2EtNTk0ZC00ZGY2LWEyMjctNzVlZjIzYTBiNWY5IiwidGVuYW50X2lkIjoiNTA0NjAyZDBhYTk2YmY2NDIzNmQ1ZjBkOTc5YjEwNzllODcwYmQ0ODNjODQwMTg3MjRmNjFjZjQ3MjJhM2ViMCIsImludGVybmFsX3NlY3JldCI6ImUyYzExODUxLTQzMDAtNGVkZi1hZmRlLWMwMmQ1YzRmMWNiMyJ9.T8x-Lfsky17L5CQi-IfE-_M7kR5MSmrALt32In6DsQc"
+JWT_SECRET ="adlkjqahhdwiehfwijwfjfeiwrfhielhfiehuevermihxcfhcneugfuernhchefhgo"
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
