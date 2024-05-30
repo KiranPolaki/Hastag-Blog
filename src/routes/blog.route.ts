@@ -78,14 +78,18 @@ blogRouter.put("/", async (c) => {
 // TODO: Pagination to this end point
 blogRouter.get("/bulk", async (c) => {
   try {
-  } catch (error) {}
-  const prisma = new PrismaClient({
-    datasourceUrl: c.env.DATABASE_URL,
-  }).$extends(withAccelerate());
-  const blogs = await prisma.blog.findMany();
-  return c.json({
-    blogs,
-  });
+    const prisma = new PrismaClient({
+      datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+    const blogs = await prisma.blog.findMany();
+    return c.json({
+      blogs,
+    });
+  } catch (error) {
+    return c.json({
+      error: "Cant get blogs, not logged in",
+    });
+  }
 });
 
 blogRouter.get("/:id", async (c) => {
