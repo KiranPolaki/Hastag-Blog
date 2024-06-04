@@ -2,8 +2,8 @@ name = "hastag-blog"
 compatibility_date = "2023-12-01"
 
 [vars]
-DATABASE_URL=""
-JWT_SECRET =""
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMmQxNjFhYjEtZjE3NC00NjAyLWFjOGEtZmZjOTA5ZTE3N2NkIiwidGVuYW50X2lkIjoiNTA0NjAyZDBhYTk2YmY2NDIzNmQ1ZjBkOTc5YjEwNzllODcwYmQ0ODNjODQwMTg3MjRmNjFjZjQ3MjJhM2ViMCIsImludGVybmFsX3NlY3JldCI6ImUyYzExODUxLTQzMDAtNGVkZi1hZmRlLWMwMmQ1YzRmMWNiMyJ9.hReHdx1N392FtzK_uDV4eqRMge7NGOgIn7iBoVG2x30"
+JWT_SECRET ="prod_jwt_secret_akjsdhflkjhsdfkjashfhur4yrr8347fh3478ryfhufhuilfh3uih"
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"

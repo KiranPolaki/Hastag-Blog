@@ -21,14 +21,16 @@ export default function Auth({ type }: { type: "signup" | "signin" }) {
         `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
         postInputs
       );
-      const jwt = response.data;
-      localStorage.setItem("token", jwt);
+      console.log(response.data);
+      const data = response.data;
+      localStorage.setItem("token", data.token);
       navigate("/blogs");
     } catch (error) {
-      //alert the use that the req failed
+      alert(error);
     }
   }
 
+  // TODO: Add loading until its redirected to blog
   return (
     <div className="h-screen flex justify-center flex-col">
       <div className="flex justify-center">
