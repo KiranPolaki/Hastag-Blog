@@ -4,6 +4,7 @@ import { withAccelerate } from "@prisma/extension-accelerate";
 import { verify, decode } from "hono/jwt";
 import { createBlogInput, updateBlogInput } from "@saiop/medium-common";
 
+// TODO: REmove the creds you passed after the project is done
 export const blogRouter = new Hono<{
   Bindings: {
     DATABASE_URL: string;
@@ -103,7 +104,18 @@ blogRouter.get("/bulk", async (c) => {
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate());
-    const blogs = await prisma.blog.findMany();
+    const blogs = await prisma.blog.findMany({
+      select: {
+        content: true,
+        title: true,
+        id: true,
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
     return c.json({
       blogs,
     });
@@ -124,6 +136,16 @@ blogRouter.get("/:id", async (c) => {
     const blog = await prisma.blog.findFirst({
       where: {
         id: Number(id),
+      },
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        author: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
     return c.json({
