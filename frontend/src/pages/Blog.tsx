@@ -8,11 +8,12 @@ function Blog() {
   const { blog, loading } = useBlog({
     id: id || "",
   });
+  console.log(blog);
 
   if (loading) {
     return <>loading</>;
   }
-  return <BlogContent />;
+  return <BlogContent blog={blog} />;
 }
 
 export { Blog };

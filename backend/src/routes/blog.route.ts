@@ -4,7 +4,6 @@ import { withAccelerate } from "@prisma/extension-accelerate";
 import { verify, decode } from "hono/jwt";
 import { createBlogInput, updateBlogInput } from "@saiop/medium-common";
 
-// TODO: REmove the creds you passed after the project is done
 export const blogRouter = new Hono<{
   Bindings: {
     DATABASE_URL: string;
@@ -98,7 +97,6 @@ blogRouter.put("/", async (c) => {
   }
 });
 
-// TODO: Pagination to this end point
 blogRouter.get("/bulk", async (c) => {
   try {
     const prisma = new PrismaClient({
@@ -157,3 +155,10 @@ blogRouter.get("/:id", async (c) => {
     });
   }
 });
+
+// TODOs: Image ability
+// Ability to upload cover images only and only explaining diagram thats it
+// TODO: Post In dev Community / medium
+// Write here and export that to dev post everywhere
+// TODO: REmove the creds you passed after the project is done
+// TODO: Pagination to this end point

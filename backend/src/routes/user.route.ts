@@ -67,3 +67,10 @@ userRouter.post("/signin", async (c) => {
     return c.text("invalid");
   }
 });
+
+// TODO: Backend Changes
+// TODO: take image as input steps below
+// during signup ask to upload the image
+// post that to cloudinary get the url
+// store the url in prisma
+// prisma to get here and display that

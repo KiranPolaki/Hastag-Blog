@@ -1,5 +1,6 @@
 import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
+import { Skelton } from "../components/Skelton";
 import { useBlogs } from "../hooks";
 
 // TODO: Revamp the entire UI after this class and it will be like v0 we saw
@@ -10,7 +11,15 @@ import { useBlogs } from "../hooks";
 function Blogs() {
   const { loading, blogs } = useBlogs();
   if (loading) {
-    return <div> loading </div>;
+    return (
+      <div>
+        <Skelton />
+        <Skelton />
+        <Skelton />
+        <Skelton />
+        <Skelton />
+      </div>
+    );
   }
   return (
     <div>
@@ -35,3 +44,5 @@ function Blogs() {
 }
 
 export { Blogs };
+
+// TODO: Skelton, loaders, caching the blogs, logout option, toasts alerst

@@ -7,9 +7,9 @@ function Avatar({
 }) {
   return (
     <div
-      className={`relative inline-flex items-center justify-center overflow-hidden bg-gray-100 rounded-full ${
+      className={`relative inline-flex items-center justify-center overflow-hidden bg-blue-500 rounded-full ${
         size === "small" ? "w-6 h-6" : "w-10 h-10"
-      } dark:bg-gray-600`}
+      }`}
     >
       <span
         className={`${
@@ -23,3 +23,6 @@ function Avatar({
 }
 
 export { Avatar };
+
+// TODO: Add image in the Avatar
+// TODO: If no image show there name 1st letter
