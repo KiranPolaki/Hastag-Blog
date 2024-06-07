@@ -3,6 +3,7 @@ import { sign } from "hono/jwt";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { signupInput, signinInput } from "@saiop/medium-common";
+import { v2 as cloudinary } from "cloudinary";
 
 export const userRouter = new Hono<{
   Bindings: {
@@ -11,30 +12,39 @@ export const userRouter = new Hono<{
   };
 }>();
 
-// TODO: when validiting stuff make sure we read the error and send the responces accoridng to what error it give. That will make it less lazy
 userRouter.post("/signup", async (c) => {
   try {
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate());
+
     const body = await c.req.json();
-    const { success } = signupInput.safeParse(body);
-    if (!success) {
+    const signupRes = signupInput.safeParse(body);
+
+    if (!signupRes.success) {
+      c.status(400);
       return c.json({
         message: "Inputs are incorrect!",
+        error: signupRes,
       });
     }
+
     const user = await prisma.user.create({
       data: {
-        username: body.username,
-        password: body.password,
         name: body.name,
+        email: body.email,
+        password: body.password,
       },
     });
     const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
+    c.status(201);
     return c.json({ token: jwt });
   } catch (error) {
-    return c.text("invalid");
+    console.log(error);
+    c.status(500);
+    return c.json({
+      message: "Oops Its not. you it's us",
+    });
   }
 });
 
@@ -53,13 +63,13 @@ userRouter.post("/signin", async (c) => {
     }
     const user = await prisma.user.findFirst({
       where: {
-        username: body.username,
+        email: body.email,
         password: body.password,
       },
     });
     if (!user) {
       c.status(403);
-      return c.json({ message: "Incorrent creds" });
+      return c.json({ message: "Incorrent creds", error: user });
     }
     const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
     return c.json({ token: jwt });
@@ -74,3 +84,5 @@ userRouter.post("/signin", async (c) => {
 // post that to cloudinary get the url
 // store the url in prisma
 // prisma to get here and display that
+// TODO: forgot password
+// TODO: when validiting stuff make sure we read the error and send the responces accoridng to what error it give. That will make it less lazy
