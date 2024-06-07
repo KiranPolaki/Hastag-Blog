@@ -71,7 +71,7 @@ userRouter.post("/signin", async (c) => {
 
     if (!user) {
       c.status(403);
-      return c.json({ message: "Incorrent creds" });
+      return c.json({ message: "Incorrent creds/ Unauthorized" });
     }
 
     const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
@@ -82,15 +82,30 @@ userRouter.post("/signin", async (c) => {
   }
 });
 
-userRouter.put("/forgot", async (c) => {
-  try {
-    const prisma = new PrismaClient({
-      datasourceUrl: c.env.DATABASE_URL,
-    }).$extends(withAccelerate());
-    const body = c.req.json();
-    const emailRes = forgotPassword.safeParse(body);
-  } catch (error) {}
-});
+// userRouter.put("/forgot", async (c) => {
+//   try {
+//     const prisma = new PrismaClient({
+//       datasourceUrl: c.env.DATABASE_URL,
+//     }).$extends(withAccelerate());
+//     const body = await c.req.json();
+//     const emailRes = forgotPassword.safeParse(body);
+//     if (!forgotPassword.success) {
+//       c.status(400);
+//       return c.json({
+//         message: "Inputs are incorrect",
+//       });
+//     }
+//     const user = await prisma.user.findFirst({
+//       where: {
+//         email: body.email,
+//       },
+//     });
+//     if (!user) {
+//       c.status(403);
+//       return c.json({ message: "Email not found" });
+//     }
+//   } catch (error) {}
+// });
 
 // TODO: Backend Changes
 // TODO: take image as input steps below

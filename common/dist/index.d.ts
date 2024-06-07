@@ -54,6 +54,14 @@ export declare const updateBlogInput: z.ZodObject<{
     id: number;
     thumbnail?: string | undefined;
 }>;
+export declare const forgotPassword: z.ZodObject<{
+    email: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    email: string;
+}, {
+    email: string;
+}>;
+export type forgotPassword = z.infer<typeof forgotPassword>;
 export type CreateBlogInput = z.infer<typeof createBlogInput>;
 export type UpdateBlogInput = z.infer<typeof updateBlogInput>;
 export type SignupInput = z.infer<typeof signupInput>;
