@@ -1,3 +1,4 @@
+import { Appbar } from "../components/Appbar";
 import { BlogContent } from "../components/BlogContent";
 import { useBlog } from "../hooks";
 import { useParams } from "react-router-dom";
@@ -13,7 +14,12 @@ function Blog() {
   if (loading) {
     return <>loading</>;
   }
-  return <BlogContent blog={blog} />;
+  return (
+    <div>
+      <Appbar />
+      <BlogContent blog={blog} />
+    </div>
+  );
 }
 
 export { Blog };

@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         "logo-cursive": ["Cedarville Cursive", "cursive"],
+        "title-sans": ["Noto Sans", "sans-serif"],
       },
     },
   },
