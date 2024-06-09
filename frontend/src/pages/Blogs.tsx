@@ -1,6 +1,7 @@
 // import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
-import { Skelton } from "../components/Skelton";
+// import { Skelton } from "../components/Skelton";
+import { RandomArticle } from "../components/RandomArticle";
 import { useBlogs } from "../hooks";
 import { Appbar } from "../components/Appbar";
 
@@ -11,35 +12,36 @@ import { Appbar } from "../components/Appbar";
 
 function Blogs() {
   const { loading, blogs } = useBlogs();
-  if (loading) {
-    return (
-      <div>
-        <Skelton />
-        <Skelton />
-        <Skelton />
-        <Skelton />
-        <Skelton />
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div>
+  //       <Skelton />
+  //       <Skelton />
+  //       <Skelton />
+  //       <Skelton />
+  //       <Skelton />
+  //     </div>
+  //   );
+  // }
   return (
     <div className="flex flex-col min-h-screen bg-black">
       <Appbar />
-      <div className="flex-grow px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
-        <div className="flex justify-center">
-          <div className="">
-            {blogs.map((blog) => {
-              return (
-                <BlogCard
-                  id={blog.id}
-                  authorName={blog.author.name || "Anonymous"}
-                  title={blog.title}
-                  content={blog.content}
-                  publishedDate={"2nd Feb 2024"}
-                />
-              );
-            })}
-          </div>
+      <div className="flex justify-center flex-grow py-4 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] lg:flex-row lg:px-48">
+        <div className="hidden lg:block w-full h-full lg:w-1/2 text-white">
+          <RandomArticle />
+        </div>
+        <div className="w-full lg:w-1/2">
+          {blogs.map((blog) => {
+            return (
+              <BlogCard
+                id={blog.id}
+                authorName={blog.author.name || "Anonymous"}
+                title={blog.title}
+                content={blog.content}
+                publishedDate={"2nd Feb 2024"}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

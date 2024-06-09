@@ -25,10 +25,10 @@ function Appbar() {
   return (
     <div
       className="sticky top-0 z-10 flex justify-between px-14 py-9 cursor-pointer bg-black lg:px-52"
-      style={{
-        background:
-          "radial-gradient(125% 125% at 50% 90%, #000 40%, #63e 100%)",
-      }}
+      // style={{
+      //   background:
+      //     "radial-gradient(125% 125% at 50% 90%, #000 40%, #63e 100%)",
+      // }}
     >
       <Link
         to={"/blogs"}

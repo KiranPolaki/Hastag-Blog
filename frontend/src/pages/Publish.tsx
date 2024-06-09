@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { Appbar } from "../components/Appbar";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // TODO: make use of the wysiwyg editor
@@ -21,7 +21,7 @@ function Publish() {
             className="block mb-2 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
             placeholder="title"
           ></input>
-          <TextEditor onChange={(e) => setContent(e.target.value)} />
+          <TextEditor onChange={setContent} />
           <button
             type="button"
             onClick={async () => {
@@ -50,15 +50,11 @@ function Publish() {
 }
 export { Publish };
 
-function TextEditor({
-  onChange,
-}: {
-  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-}) {
+function TextEditor({ onChange }: { onChange: (value: string) => void }) {
   return (
     <div>
       <input
-        onChange={onChange}
+        onChange={(e) => onChange(e.target.value)}
         type="text"
         className="block mb-2 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
         placeholder="Write an article"
