@@ -11,9 +11,9 @@ function Publish() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="">
       <Appbar />
-      <div className="flex justify-center">
+      <div className="flex justify-center bg-neutral-950	">
         <div className="max-w-screen-lg w-full pt-8">
           <input
             onChange={(e) => setTitle(e.target.value)}
@@ -66,3 +66,7 @@ function TextEditor({
     </div>
   );
 }
+
+// TODO: Use the notion rich text if possible
+// TODO: Lets see how to use the HashNode in my webiset
+// TODO: Ability to store the images in R2 or S3

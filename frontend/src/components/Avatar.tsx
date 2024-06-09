@@ -7,14 +7,14 @@ function Avatar({
 }) {
   return (
     <div
-      className={`relative inline-flex items-center justify-center overflow-hidden bg-blue-500 rounded-full ${
+      className={`relative inline-flex items-center justify-center overflow-hidden bg-white rounded-full ${
         size === "small" ? "w-6 h-6" : "w-10 h-10"
       }`}
     >
       <span
         className={`${
           size === "small" ? "text-xs" : "text-md"
-        } text-sm text-gray-600 dark:text-gray-300`}
+        } font-semibold text-black `}
       >
         {name[0]}
       </span>

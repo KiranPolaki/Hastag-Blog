@@ -7,28 +7,61 @@ import axios from "axios";
 // TODO: trpc
 // TODO: Divide this into two components cause th etype inference will give problems
 
-export default function Auth({ type }: { type: "signup" | "signin" }) {
+export default function Auth({
+  type,
+  setLoading,
+}: {
+  type: "signup" | "signin";
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const [postInputs, setPostInputs] = useState<SignupInput>({
     name: "",
-    username: "",
+    email: "",
     password: "",
   });
+  const [postInputsSignin, setPostInputsSignin] = useState({
+    email: "",
+    password: "",
+  });
+  // const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   async function sendRequest() {
+    setLoading(true);
     try {
       const response = await axios.post(
-        `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
+        `${BACKEND_URL}/api/v1/user/signup`,
         postInputs
       );
-      console.log(response.data);
       const data = response.data;
       localStorage.setItem("token", data.token);
+      setLoading(false);
       navigate("/blogs");
     } catch (error) {
+      console.log(error);
       alert(error);
     }
   }
+  async function sendRequestSigin() {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/user/signin`,
+        postInputsSignin
+      );
+      const data = response.data;
+      localStorage.setItem("token", data.token);
+      setLoading(false);
+      navigate("/blogs");
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  }
+
+  // if (loading) {
+  //   return <>loading...</>;
+  // }
 
   // TODO: Add loading until its redirected to blog
   return (
@@ -66,13 +99,20 @@ export default function Auth({ type }: { type: "signup" | "signin" }) {
               />
             ) : null}
             <LabelInput
-              label={"Username"}
+              label={"Email"}
               placeholder="SaiKiran@gmail.com"
               onChange={(e) => {
-                setPostInputs((c) => ({
-                  ...c,
-                  username: e.target.value,
-                }));
+                if (type === "signup") {
+                  setPostInputs((c) => ({
+                    ...c,
+                    email: e.target.value,
+                  }));
+                } else {
+                  setPostInputsSignin((c) => ({
+                    ...c,
+                    email: e.target.value,
+                  }));
+                }
               }}
             />
             <LabelInput
@@ -80,15 +120,22 @@ export default function Auth({ type }: { type: "signup" | "signin" }) {
               placeholder="Shhh...."
               type={"password"}
               onChange={(e) => {
-                setPostInputs((c) => ({
-                  ...c,
-                  password: e.target.value,
-                }));
+                if (type === "signup") {
+                  setPostInputs((c) => ({
+                    ...c,
+                    password: e.target.value,
+                  }));
+                } else {
+                  setPostInputsSignin((c) => ({
+                    ...c,
+                    password: e.target.value,
+                  }));
+                }
               }}
             />
             <button
               type="button"
-              onClick={sendRequest}
+              onClick={type === "signup" ? sendRequest : sendRequestSigin}
               className="mt-8 w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
             >
               {type === "signup" ? "Sign up" : "Sign in"}

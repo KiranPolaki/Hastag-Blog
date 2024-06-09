@@ -1,7 +1,8 @@
-import { Appbar } from "../components/Appbar";
+// import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
 import { Skelton } from "../components/Skelton";
 import { useBlogs } from "../hooks";
+import { Appbar } from "../components/Appbar";
 
 // TODO: Revamp the entire UI after this class and it will be like v0 we saw
 // TODO: Lazy loading for blogs, on scroll adding blogs/ pagination
@@ -22,21 +23,23 @@ function Blogs() {
     );
   }
   return (
-    <div>
+    <div className="flex flex-col min-h-screen bg-black">
       <Appbar />
-      <div className="flex justify-center">
-        <div className="">
-          {blogs.map((blog) => {
-            return (
-              <BlogCard
-                id={blog.id}
-                authorName={blog.author.name || "Anonymous"}
-                title={blog.title}
-                content={blog.content}
-                publishedDate={"2nd Feb 2024"}
-              />
-            );
-          })}
+      <div className="flex-grow px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
+        <div className="flex justify-center">
+          <div className="">
+            {blogs.map((blog) => {
+              return (
+                <BlogCard
+                  id={blog.id}
+                  authorName={blog.author.name || "Anonymous"}
+                  title={blog.title}
+                  content={blog.content}
+                  publishedDate={"2nd Feb 2024"}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
