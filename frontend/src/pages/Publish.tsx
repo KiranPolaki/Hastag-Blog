@@ -11,7 +11,7 @@ function Publish() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="">
       <Appbar />
       <div className="flex justify-center bg-neutral-950	">
         <div className="max-w-screen-lg w-full pt-8">

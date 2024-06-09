@@ -15,7 +15,7 @@ function Blog() {
     return <>loading</>;
   }
   return (
-    <div>
+    <div className="bg-black">
       <Appbar />
       <BlogContent blog={blog} />
     </div>
