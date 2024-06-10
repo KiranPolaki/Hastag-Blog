@@ -1,9 +1,10 @@
 import "quill/dist/quill.snow.css";
+import "../styles/publish.css";
 import { useState } from "react";
 import ReactQuill from "react-quill";
 
 export const TextEditor = () => {
-  const [value, setValue] = useState("");
+  const [, setValue] = useState("");
   const modules = {
     toolbar: [
       [{ size: ["small", false, "large", "huge"] }],
@@ -86,18 +87,15 @@ export const TextEditor = () => {
   };
 
   return (
-    <div>
-      <h1 style={{ textAlign: "center" }}>Text Editor In React JS</h1>
-      <div style={{ display: "grid", justifyContent: "center" }}>
-        <ReactQuill
-          theme="snow"
-          modules={modules}
-          formats={formats}
-          placeholder="write your content ...."
-          onChange={handleProcedureContentChange}
-          style={{ height: "220px" }}
-        ></ReactQuill>
-      </div>
+    <div className="h-fit">
+      <ReactQuill
+        className="myQuillEditor "
+        theme="snow"
+        modules={modules}
+        formats={formats}
+        placeholder="Content"
+        onChange={handleProcedureContentChange}
+      ></ReactQuill>
     </div>
   );
 };

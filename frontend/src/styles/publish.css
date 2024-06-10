@@ -1,0 +1,21 @@
+.myQuillEditor .ql-container.ql-snow {
+  border: none;
+  color: white;
+  background: #000;
+  font-style: normal;
+  font-family: "Noto Sans", "sans-serif";
+  font-size: 18px;
+}
+
+.ql-editor.ql-blank::before {
+  color: white;
+  font-style: normal;
+  font-family: "Noto Sans", "sans-serif";
+  font-size: 18px;
+}
+.ql-editor.ql-blank {
+  color: white;
+  font-style: normal;
+  font-family: "Noto Sans", "sans-serif";
+  font-size: 18px;
+}

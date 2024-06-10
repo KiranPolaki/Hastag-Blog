@@ -12,6 +12,7 @@
   "dependencies": {
     "@saiop/medium-common": "^1.2.3",
     "@types/quill": "^2.0.14",
+    "autosize": "^6.0.1",
     "axios": "^1.7.2",
     "novel": "^0.4.2",
     "quill": "^2.0.2",
