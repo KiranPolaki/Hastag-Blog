@@ -16,11 +16,11 @@ export function PublishRichText() {
   return (
     <div className="bg-black w-screen h-screen">
       <Appbar />
-      <div className="h-fit bg-black">
-        <div className="w-full px-52">
+      <div className=" bg-black">
+        <div className="w-full px-52 mt-2">
           <textarea
             onChange={(e) => setTitle(e.target.value)}
-            className="block border-none mb-2 w-full h-fit text-6xl text-white rounded-lg bg-black resize-none  font-semibold  focus:outline-none font-title-sans"
+            className="px-2 block border-none w-full h-20 text-6xl text-white rounded-lg bg-black resize-none  font-semibold  focus:outline-none font-title-sans"
             placeholder="title"
           ></textarea>
         </div>

@@ -1,4 +1,4 @@
-import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css"; // Import bubble theme
 import "../styles/publish.css";
 import { useState } from "react";
 import ReactQuill from "react-quill";
@@ -89,8 +89,8 @@ export const TextEditor = () => {
   return (
     <div className="h-fit">
       <ReactQuill
-        className="myQuillEditor "
-        theme="snow"
+        className="myQuillEditor"
+        theme="bubble" // Use bubble theme
         modules={modules}
         formats={formats}
         placeholder="Content"
