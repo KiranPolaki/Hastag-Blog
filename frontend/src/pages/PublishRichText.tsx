@@ -9,45 +9,62 @@ import autosize from "autosize";
 export function PublishRichText() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [disable, setDisable] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
-    autosize(document.querySelector("textarea"));
+    const textarea = document.querySelector("textarea");
+    if (textarea) {
+      autosize(textarea);
+    }
   }, []);
+
+  useEffect(() => {
+    if (title !== "" && content !== "") {
+      setDisable(false);
+    }
+  }, [title, content]);
+
   return (
-    <div className="bg-black w-screen h-screen">
-      <Appbar />
-      <div className=" bg-black">
-        <div className="w-full px-52 mt-2">
+    <div className="w-screen min-h-screen [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
+      <Appbar type="publish" />
+      <div className="px-8 lg:px-52">
+        <div className={`mb-6 pl-2 `}>
+          <button
+            type="button"
+            onClick={async () => {
+              const res = await axios.post(
+                `${BACKEND_URL}/api/v1/blog`,
+                {
+                  title,
+                  content,
+                },
+                {
+                  headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                  },
+                }
+              );
+              navigate(`/blog/${res.data.id}`);
+            }}
+            className={`mt-1 px-3 text-lg bg-blue-600 font-medium text-white focus:outline-none flex items-center rounded-full hover:bg-blue-400 focus:z-10 focus:ring-4 focus:ring-gray-100 ${
+              disable ? "opacity-60 cursor-not-allowed" : ""
+            }`}
+          >
+            publish
+          </button>
+        </div>
+        <div className="w-full mt-2">
           <textarea
             onChange={(e) => setTitle(e.target.value)}
-            className="px-2 block border-none w-full h-20 text-6xl text-white rounded-lg bg-black resize-none  font-semibold  focus:outline-none font-title-sans"
-            placeholder="title"
+            onFocus={(e) => (e.target.placeholder = "Title")}
+            onBlur={(e) => (e.target.placeholder = "Tell your story?")}
+            className=" text-3xl h-12 px-3 block border-none w-full lg:text-6xl lg:h-20 text-white rounded-lg resize-none font-semibold focus:outline-none bg-transparent font-title-sans"
+            placeholder="Tell your story?"
           ></textarea>
         </div>
-        <div className="text-white px-52 w-full h-fit">
-          <TextEditor />
+        <div className="text-white w-full">
+          <TextEditor setContent={setContent} />
         </div>
-        <button
-          type="button"
-          onClick={async () => {
-            const res = await axios.post(
-              `${BACKEND_URL}/api/v1/blog`,
-              {
-                title,
-                content,
-              },
-              {
-                headers: {
-                  Authorization: "Bearer " + localStorage.getItem("token"),
-                },
-              }
-            );
-            navigate(`/blog/${res.data.id}`);
-          }}
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 "
-        >
-          Submit post
-        </button>
       </div>
     </div>
   );
@@ -56,3 +73,5 @@ export function PublishRichText() {
 // title
 // poster
 // content
+
+// TODO: Show toast until it is posted

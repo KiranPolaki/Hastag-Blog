@@ -25,7 +25,7 @@ function Blogs() {
   // }
   return (
     <div className="flex flex-col min-h-screen bg-black">
-      <Appbar />
+      <Appbar type="others" />
       <div className="flex justify-center flex-grow py-4 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] lg:flex-row lg:px-48">
         <div className="hidden lg:block w-full h-full lg:w-1/2 text-white">
           <RandomArticle />

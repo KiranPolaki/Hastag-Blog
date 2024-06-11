@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Avatar } from "./Avatar";
 import { Link } from "react-router-dom";
 
-function Appbar() {
+function Appbar({ type }: { type: "publish" | "others" }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   function toggleSidebar() {
@@ -24,7 +24,7 @@ function Appbar() {
 
   return (
     <div
-      className="sticky top-0 z-10 flex justify-between px-14 py-9 cursor-pointer bg-black lg:px-52"
+      className="sticky top-0 z-10 flex justify-between px-11 py-9 cursor-pointer bg-black lg:px-52"
       // style={{
       //   background:
       //     "radial-gradient(125% 125% at 50% 90%, #000 40%, #63e 100%)",
@@ -55,7 +55,7 @@ function Appbar() {
         </button>
       </div>
       <div
-        className={`fixed transform top-0 right-0 w-64 h-full shadow-lg overflow-auto ease-in-out transition-transform duration-300 ${
+        className={`fixed transform top-0 right-0 w-64 h-full shadow-lg ease-in-out transition-transform duration-300 ${
           sidebarOpen
             ? "translate-x-0 backdrop-filter backdrop-blur-lg bg-opacity-30"
             : "translate-x-full"
@@ -115,28 +115,35 @@ function Appbar() {
           </div>
         </div>
         <div className="flex justify-center flex-col items-center">
-          <Link to={"/publish"} className="flex items-center rounded-full mt-7">
-            <button
-              type="button"
-              className="py-2.5 me-1 mb-2 mt-1 text-lg font-medium text-white focus:outline-none flex items-center rounded-full hover:text-blue-400 focus:z-10 focus:ring-4 focus:ring-gray-100"
+          {type === "others" ? (
+            <Link
+              to={"/publish"}
+              className="flex items-center rounded-full mt-7"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-6"
+              <button
+                type="button"
+                className="py-2.5 me-1 mb-2 mt-1 text-lg font-medium text-white focus:outline-none flex items-center rounded-full hover:text-blue-400 focus:z-10 focus:ring-4 focus:ring-gray-100"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-                />
-              </svg>
-              Write
-            </button>
-          </Link>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                  />
+                </svg>
+                Write
+              </button>
+            </Link>
+          ) : (
+            <></>
+          )}
           <Link to={"/blogs"} className="flex items-center rounded-full">
             <button
               type="button"
@@ -185,59 +192,49 @@ function Appbar() {
       </div>
       <div className="hidden lg:flex items-center px-2 gap-16">
         {/* The search bar and the "New Post" button will only be visible on large screens. */}
-        <div className="">
-          <div className="relative w-96">
-            <input
-              type="search"
-              id="default-search"
-              className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Search Blogs..."
-              required
-            />
-            <button
-              type="submit"
-              className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm px-2 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              <svg
-                className="w-4 h-4 text-white  hover:text-gray-500"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+        {type === "publish" ? null : (
+          <>
+            <div className="">
+              <div className="relative w-96">
+                <input
+                  type="search"
+                  id="default-search"
+                  className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Search Blogs..."
+                  required
                 />
-              </svg>
-            </button>
-          </div>
-        </div>
-        <Link to={"/publish"} className="flex items-center rounded-full">
-          <button
-            type="button"
-            className="py-2.5 me-1 mb-2 mt-1 text-lg font-medium text-white focus:outline-none flex items-center rounded-full hover:text-blue-400 focus:z-10 focus:ring-4 focus:ring-gray-100"
-          >
-            New Post
-          </button>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6 text-white hover:text-blue-400 focus:z-10 focus:ring-4 focus:ring-gray-100"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-            />
-          </svg>
-        </Link>
+                <button
+                  type="submit"
+                  className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-sm px-2 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  <svg
+                    className="w-4 h-4 text-white  hover:text-gray-500"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <Link to={"/publish"} className="flex items-center rounded-full">
+              <button
+                type="button"
+                className="py-2.5 me-1 mb-2 mt-1 text-lg font-medium text-white focus:outline-none flex items-center rounded-full hover:text-blue-400 focus:z-10 focus:ring-4 focus:ring-gray-100"
+              >
+                New Post
+              </button>
+            </Link>
+          </>
+        )}
         <Avatar name="harkirat" size={"big"} />
       </div>
     </div>

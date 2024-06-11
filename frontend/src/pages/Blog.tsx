@@ -16,7 +16,7 @@ function Blog() {
   }
   return (
     <div className="bg-black">
-      <Appbar />
+      <Appbar type="others" />
       <BlogContent blog={blog} />
     </div>
   );

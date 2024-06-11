@@ -6,9 +6,10 @@ import mediumImage from "../assets/medium.png";
 
 // TODO: return posted date from backend
 function BlogContent({ blog }: { blog: Blog }) {
+  const htmlString = blog.content || "";
   return (
     <>
-      <div className="flex flex-col min-h-screen px-5 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] lg:items-center">
+      <div className="flex flex-col min-h-screen [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] lg:items-center">
         <div className="lg:relative w-full h-16">
           <div className="lg:absolute left-36 text-slate-300 px-10 pb-10 cursor-pointer w-52">
             <Link
@@ -48,9 +49,10 @@ function BlogContent({ blog }: { blog: Blog }) {
               </span>
               <div className="text-slate-400 text-lg">2nd Dec 2023</div>
             </div>
-            <div className="pt-4 text-white text-lg break-words leading-7">
-              {blog.content}
-            </div>
+            <div
+              className="pt-4 text-white text-lg break-words leading-8"
+              dangerouslySetInnerHTML={{ __html: htmlString }}
+            />
           </div>
           <div className="col-span-4">
             <div className="lg:flex text-white font-bold text-3xl tracking-wider">
